@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
+	<display-name>文字版权管理系统Scf工程</display-name>
+	<context-param>
+	  <param-name>webAppRootKey</param-name>
+	  <param-value>webapp.CopyrightSystemScf</param-value>
+	</context-param>
+  
+	<!-- acws 框架加载 start -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:acws.xml</param-value>
+	</context-param>
+	<!-- acws 框架加载 end -->
+	<context-param>
+	  <param-name>logbackConfigLocation</param-name>
+	  <param-value>classpath:logback.xml</param-value>
+	</context-param>
+
+	<listener>
+	  <listener-class>com.tyyd.framework.web.AcwsContextListener</listener-class>
+	</listener>
+	<listener>
+	  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+	  <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<listener>
+	  <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	<listener>
+	  <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+	</listener>
+	<listener>
+	  <listener-class>com.tyyd.web.MyContextListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>mbeanMonitor</servlet-name>
+		<servlet-class>com.yutian.mbean.monitor.MbeanMonitorServlet
+		</servlet-class>
+		<init-param>
+			<param-name>type</param-name>
+			<param-value>1,2,3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>threadNameKeys</param-name>
+			<param-value>http,ajp,SCF</param-value>
+		</init-param>
+<!-- 		<init-param> -->
+<!-- 			<param-name>dataSource</param-name> -->
+<!-- 			<param-value>dsMysql</param-value> -->
+<!-- 		</init-param> -->
+		<init-param>
+			<param-name>intervalTime</param-name>
+			<param-value>30000</param-value>
+		</init-param>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+
+	<!-- 禁止不安全的http方法 -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>fortune</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+		</web-resource-collection>
+		<auth-constraint />
+	</security-constraint>
+</web-app>

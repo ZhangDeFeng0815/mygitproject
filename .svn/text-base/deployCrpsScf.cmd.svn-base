@@ -1,0 +1,2 @@
+mvn deploy:deploy-file -DgroupId=com.tyyd -DartifactId=crps.scf -Dversion=1.0.0-SNAPSHOT -Dpackaging=jar -Dfile=%~sdp0target-crps\crps.scf-1.0.0-SNAPSHOT.jar -Dsources=%~sdp0target-crps\crps.scf-1.0.0-SNAPSHOT-source.jar -DrepositoryId=snapshots -Durl=http://admin:tianyiyuedu@61.130.247.181:6081/nexus/content/repositories/snapshots
+pause	

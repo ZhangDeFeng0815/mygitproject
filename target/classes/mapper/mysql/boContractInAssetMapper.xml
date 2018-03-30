@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.ContractInAssetDaoImpl">
+	<select id="searchAssetIdsByContractCd" parameterType="Map" resultType="map">
+		SELECT 
+			CI.ASSET_ID 
+		FROM 
+			BO_CONTRACT_IN_ASSET CI
+		WHERE 
+			1 = 1
+			AND CI.CONTRACT_CD = #{CONTRACT_CD} 
+		ORDER BY CI.ASSET_ID DESC
+	</select>
+	
+	<delete id="deleteByAssetIdAndContractId" parameterType="Map">
+	     DELETE FROM BO_CONTRACT_IN_ASSET
+	     WHERE ASSET_ID = #{ASSET_ID} 
+	     	AND CONTRACT_CD = #{CONTRACT_CD} 
+	</delete>
+	
+	<select id="countContractInByAId" parameterType="Map" resultType="int">
+        SELECT COUNT(*)
+        FROM
+            BO_CONTRACT_IN_ASSET
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test='ASSET_ID != null and ASSET_ID != "" or ASSET_ID == 0'>
+                AND ASSET_ID = #{ASSET_ID}
+            </if>
+        </trim>
+    </select>
+</mapper>

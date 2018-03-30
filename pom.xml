@@ -1,0 +1,223 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.tyyd</groupId>
+  <artifactId>CopyrightSystemScf</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+	<repositories>
+		<repository>
+			<id>snapshots</id>
+			<url>http://61.130.247.181:6081/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>yutian</id>
+			<url>http://61.130.247.181:6081/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<properties>
+		<!-- jdk1.6不支持4.0.7.RELEASE以上版本 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<apache.log4j-version>2.3</apache.log4j-version>
+		<activiti.version>5.16.3</activiti.version>
+	</properties>
+
+	<dependencies>
+		<!-- 框架级 JAR 开始 -->
+		<dependency>
+			<groupId>com.tyyd</groupId>
+			<artifactId>acws.all</artifactId>
+			<version>1.4.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.tyyd</groupId>
+		  <artifactId>acws.readplatform</artifactId>
+		  <version>1.3.12</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>4.0.7.RELEASE</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>commons-lang</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		<!-- 框架级 JAR 结束 -->
+		<!-- 项目级 JAR 开始 -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.7.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.tyyd.platform.common</groupId>
+			<artifactId>dynamic-datasource</artifactId>
+			<version>1.6-SNAPSHOT</version>
+			<exclusions>
+		        <exclusion>
+		          <groupId>org.slf4j</groupId>
+		          <artifactId>slf4j-log4j12</artifactId>
+		        </exclusion>
+	      	</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-commons</artifactId>
+			<version>3.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.yutian</groupId>
+			<artifactId>CodeConstants</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+		  <groupId>com.tyyd</groupId>
+		  <artifactId>tyydlog.platform.scf</artifactId>
+		  <version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- 需要访问EJB时，引入jbossall jar -->
+		<dependency>
+			<groupId>org.jboss.client</groupId>
+			<artifactId>jbossall-client</artifactId>
+			<version>4.2.3.GA</version>
+		</dependency>
+
+		<!-- jboss作为应用服务器时，需要引入 -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.jboss</groupId> -->
+		<!-- <artifactId>jnpserver</artifactId> -->
+		<!-- <version>4.2.3.GA</version> -->
+		<!-- </dependency> -->
+		<dependency>
+		  	<groupId>com.tyyd</groupId>
+		  	<artifactId>tyydlog.platform.scf</artifactId>
+		  	<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<!-- 项目级 JAR 结束 -->
+
+		<dependency>
+			<groupId>com.yutian.scf</groupId>
+			<artifactId>scf</artifactId>
+			<version>2.1-SNAPSHOT</version>
+			<exclusions>
+		        <exclusion>
+		          <groupId>org.slf4j</groupId>
+		          <artifactId>slf4j-log4j12</artifactId>
+		        </exclusion>
+	      	</exclusions>
+			
+		</dependency>
+
+		<dependency>
+			<groupId>com.yutian.mbean.monitor</groupId>
+			<artifactId>mbean-monitor</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>log4j</groupId> -->
+		<!-- <artifactId>log4j</artifactId> -->
+		<!-- <version>1.2.17</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.9</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>ejbModule</groupId>
+			<artifactId>ReadPlatform_Common</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>eclipse</groupId>
+			<artifactId>link</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<!-- UIC -->
+		<dependency>
+		  <groupId>com.yutian.uic</groupId>
+		  <artifactId>uic-client</artifactId>
+		  <version>2.1.12</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.tyyd.tfswrapper</groupId>
+			<artifactId>tfs-client-wrapper</artifactId>
+			<version>1.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>CopyrightSystemScf</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<sourceIncludes>
+						<sourceInclude>*</sourceInclude>
+					</sourceIncludes>
+					<useProjectReferences>false</useProjectReferences>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>  
+                    <version>3.1</version>  
+                </configuration> 
+				<!-- <configuration> -->
+				<!-- <version>2.4</version> -->
+				<!-- <warSourceDirectory> ${basedir}/webapp</warSourceDirectory> -->
+				<!-- </configuration> -->
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-compiler-javac</artifactId>
+						<version>1.9.1</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<compilerArgument>-parameters</compilerArgument>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+		<defaultGoal>compile</defaultGoal>
+	</build>
+</project>

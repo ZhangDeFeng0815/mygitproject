@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.ContractInDaoImpl">
+	<select id="searchContractInByContractCd" parameterType="Map" resultType="map">
+		SELECT 
+			* 
+		FROM BO_CONTRACT_IN C
+		WHERE 
+			1 = 1
+			AND C.IS_DELETED = 0
+			AND C.CONTRACT_CD = #{CONTRACT_CD}
+	</select>
+	
+	<select id="selectContractInByCdWithFile" parameterType="Map" resultType="map">
+        SELECT 
+            t.CONTRACT_ID
+          , t.CONTRACT_CD
+          , t.PARTNER_ID
+          , t.PARTNER_NAME
+          , t.ATTACHMENT_ID
+          , t.COST_P_1000
+          , t.create_date AS CREATE_DATE
+          , t.update_date AS UPDATE_DATE
+          , t.create_userid AS CREATE_USERID
+          , t.update_userid AS UPDATE_USERID 
+          , f.PATH
+          , f.FILE_NAME
+        FROM BO_CONTRACT_IN t
+            LEFT JOIN BO_FILE f ON f.FILE_ID = t.ATTACHMENT_ID
+        WHERE 
+            t.IS_DELETED = 0
+            AND t.CONTRACT_CD = #{CONTRACT_CD}
+    </select>
+	
+	<select id="selectContractList" parameterType="Map" resultType="map">
+        SELECT 
+            CONTRACT_ID
+          , CONTRACT_CD
+          , PARTNER_ID
+          , PARTNER_NAME
+          , ATTACHMENT_ID
+          , COST_P_1000
+          , create_date AS CREATE_DATE
+          , update_date AS UPDATE_DATE
+          , create_userid AS CREATE_USERID
+          , update_userid AS UPDATE_USERID
+        FROM BO_CONTRACT_IN c
+        <trim prefix="WHERE" prefixOverrides="AND|OR">     
+            <if test="CONTRACT_CD != null and CONTRACT_CD != ''">
+	            AND c.CONTRACT_CD = #{CONTRACT_CD}
+	        </if>
+	        <if test="PARTNER_NAME != null and PARTNER_NAME != ''">
+                AND c.PARTNER_NAME LIKE  CONCAT('%',#{PARTNER_NAME},'%')
+            </if>
+            AND C.IS_DELETED = 0
+        </trim>
+        ORDER BY c.create_date desc
+    </select>
+    
+    <select id="selectContractListCount" parameterType="Map" resultType="int">
+        SELECT 
+            COUNT(*)
+        FROM BO_CONTRACT_IN c
+        <trim prefix="WHERE" prefixOverrides="AND|OR">     
+            <if test="CONTRACT_CD != null and CONTRACT_CD != ''">
+                AND c.CONTRACT_CD = #{CONTRACT_CD}
+            </if>
+            <if test="PARTNER_NAME != null and PARTNER_NAME != ''">
+                AND c.PARTNER_NAME LIKE  CONCAT('%',#{PARTNER_NAME},'%')
+            </if>
+            AND C.IS_DELETED = 0
+        </trim>
+    </select>
+</mapper>

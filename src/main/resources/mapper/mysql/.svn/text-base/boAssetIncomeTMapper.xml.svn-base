@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.AssetIncomeTotalDaoImpl">
+    <sql id="sql_bo_asset_inc_t_columns">
+         SELECT  
+             INC.ASSET_INCOME_T_ID AS ID
+             , INC.ASSET_ID AS ASSET_ID
+             , INC.INCOME_ITEM_CD AS INCOME_ITEM_CD
+             , INC.MONEY AS MONEY
+             , INC.CREATE_DATE AS CREATE_DATE
+             , INC.UPDATE_DATE AS UPDATE_DATE
+             , INC.CREATE_USERID AS CREATE_USERID
+             , INC.UPDATE_USERID AS UPDATE_USERID
+    </sql>
+    
+    <sql id="sql_ListWhereCommon">
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="ASSET_ID != null and ASSET_ID != '' or ASSET_ID == 0">
+	            AND INC.ASSET_ID = #{ASSET_ID}
+	        </if>
+	        <if test="INCOME_ITEM_CD != null and INCOME_ITEM_CD != ''">
+	            AND INC.INCOME_ITEM_CD = #{INCOME_ITEM_CD}
+	        </if>
+        </trim>
+    </sql>
+    
+	<select id="selectIncList" parameterType="Map" resultType="Map">
+        <include refid="sql_bo_asset_inc_t_columns"/>
+        FROM
+            ${TBLNAME} INC
+        <include refid="sql_ListWhereCommon"/>
+    </select>
+    
+    <select id="countIncTotalByAIdAndItemCd" parameterType="Map" resultType="int">
+        SELECT COUNT(*)
+        FROM
+            ${TBLNAME} INC
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test='ASSET_ID != null and ASSET_ID != "" or ASSET_ID == 0'>
+                AND INC.ASSET_ID = #{ASSET_ID}
+            </if>
+            <if test="INCOME_ITEM_CD != null and INCOME_ITEM_CD != ''">
+                AND INC.INCOME_ITEM_CD = #{INCOME_ITEM_CD}
+            </if>
+        </trim>
+    </select>
+    
+    <select id="selectIncTotalSumByAssetId" parameterType="Map" resultType="Map">
+        SELECT 
+		  t.`ASSET_ID`,
+		  SUM(IFNULL(t.`MONEY`, 0)) AS MONEY 
+		FROM
+		  ${TBLNAME}  t 
+		WHERE t.`ASSET_ID` = #{ASSET_ID}
+		GROUP BY t.`ASSET_ID` 
+    </select>
+    
+    <update id="updateIncTotal" parameterType="Map" >
+		UPDATE 
+		  ${TBLNAME} 
+		SET
+		  MONEY = 
+		  (SELECT 
+		    IFNULL(SUM(t.MONEY), 0) 
+		  FROM
+		    ${TBLNAME_D} t 
+		  WHERE t.ASSET_ID = #{ASSET_ID} AND t.INCOME_ITEM_CD =#{INCOME_ITEM_CD}),
+		    UPDATE_DATE = SYSDATE(),
+		    UPDATE_USERID = #{UPDATE_USERID}
+		  WHERE ASSET_ID = #{ASSET_ID} AND INCOME_ITEM_CD = #{INCOME_ITEM_CD} 
+    </update>
+    
+    <delete id="deleteIncTotalByAId" parameterType="Map">
+        DELETE FROM ${TBLNAME}
+        WHERE 
+            ASSET_ID = #{ASSET_ID}
+    </delete>
+    
+    <select id="selectAssetIncomeTs" parameterType="Map" resultType="map">
+		SELECT 
+			A.ASSET_CD AS ASSET_CD
+			, A.WK_NAME AS WK_NAME
+			, A.AU_NAME_S AS AU_NAME_S
+			, A.AU_NAME_B AS AU_NAME_B
+			, A.MEDIA_TYPE_ID AS MEDIA_TYPE_ID 
+			, AIT.ASSET_INCOME_T_ID
+		    , AIT.ASSET_ID
+		    , AIT.INCOME_ITEM_CD
+		    , AIT.MONEY
+		    , AIT.CREATE_DATE
+		    , AIT.CREATE_USERID
+		FROM
+			${TBLNAME} AIT 
+		INNER JOIN BO_ASSET A ON A.ASSET_ID = AIT.ASSET_ID 
+		WHERE 
+			1 = 1
+		<if test="ASSET_ID != null">
+			AND AIT.ASSET_ID = #{ASSET_ID}
+		</if>
+		
+		<if test="INCOME_ITEM_CD != null and INCOME_ITEM_CD != ''">
+			AND AIT.INCOME_ITEM_CD = #{INCOME_ITEM_CD}
+		</if>
+		ORDER BY AIT.CREATE_DATE DESC
+	</select>
+</mapper>

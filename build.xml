@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="crps" basedir="." default="main">
+
+	<property environment="env" />
+	<property name="project.dir" value="CopyrightSystem" />
+	<property name="src.dir" value="src/main/java" />
+	<property name="build.dir" value="target" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="source.dir" value="${build.dir}/source" />
+	<property name="crps.version" value=".scf-1.0.0-SNAPSHOT" />
+	<property name="scf.build.dir" value="target-crps" />
+	<property name="scf.classes.dir" value="target-crps/classes" />
+	<property name="scf.source.dir" value="target-crps/source" />
+
+	<!-- 清除 -->
+	<target name="clean">
+		<delete dir="${scf.classes.dir}" />
+		<delete dir="${scf.source.dir}" />
+		<delete dir="${scf.build.dir}" />
+	</target>
+
+	<!-- 创建目录 -->
+	<target name="init" depends="clean">
+		<mkdir dir="${scf.build.dir}" />
+		<mkdir dir="${scf.classes.dir}" />
+		<mkdir dir="${scf.source.dir}" />
+	</target>
+
+	<!-- 编译 -->
+	<target name="compile" depends="init">
+		<mkdir dir="${classes.dir}" />
+		<javac target="1.6" source="1.6" srcdir="${src.dir}" destdir="${classes.dir}" fork="true" debug="yes" encoding="UTF-8">
+			<classpath refid="app.classpath" />
+		</javac>
+	</target>
+
+	<target name="main" depends="compile">
+		<copy todir="${scf.classes.dir}">
+			<fileset dir="${classes.dir}" includes="com/tyyd/crps/scf/**/service/**/*Service.class" />
+			<fileset dir="${classes.dir}" includes="com/tyyd/crps/scf/**/service/**/*Service$*.class" />
+			<fileset dir="${classes.dir}" includes="com/tyyd/crps/scf/**/dto/**/*.class" />
+			<fileset dir="${classes.dir}" includes="com/tyyd/common/*.class" />
+			<fileset dir="${classes.dir}" includes="com/tyyd/common/**/*.class" />
+			<fileset dir="${classes.dir}" includes="com/tyyd/framework/core/BusinessException.class" />
+		</copy>
+		<copy todir="${scf.source.dir}">
+			<fileset dir="${src.dir}" includes="com/tyyd/crps/scf/**/service/**/*Service.java" />
+			<fileset dir="${src.dir}" includes="com/tyyd/crps/scf/**/service/**/*Service$*.java" />
+			<fileset dir="${src.dir}" includes="com/tyyd/crps/scf/**/dto/**/*.java" />
+			<fileset dir="${src.dir}" includes="com/tyyd/common/*.java" />
+			<fileset dir="${src.dir}" includes="com/tyyd/common/**/*.java" />
+			<fileset dir="${src.dir}" includes="com/tyyd/framework/core/BusinessException.java" />
+			<fileset dir="${src.dir}" includes="com/tyyd/util/*.java" />
+			<fileset dir="${src.dir}" includes="com/tyyd/util/**/*.java" />
+		</copy>
+		<jar destfile="${scf.build.dir}/crps${crps.version}.jar" basedir="${scf.build.dir}/classes" />
+		<jar jarfile="${scf.build.dir}/crps${crps.version}-source.jar" basedir="${scf.build.dir}/source" />
+		<!--拷贝到maven和tomcat发布目录中
+		<copy todir="D:/maven/repo/com/tyyd/crps.scf/${crps.version}" file="${scf.build.dir}/crps${crps.version}.jar"> </copy>
+		<copy todir="E:/java/jboss-4.2.3.YY/server/default/deploy/CopyrightSystemScf.war/WEB-INF/lib" file="${scf.build.dir}/crps${crps.version}.jar">  </copy>
+		-->
+	</target>
+
+</project>

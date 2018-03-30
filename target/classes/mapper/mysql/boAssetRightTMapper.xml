@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.AssetRightTDaoImpl">
+
+	<select id="searchAssetRightTs" parameterType="Map" resultType="map">
+		SELECT  
+			ART.ASSET_RIGHT_T_ID
+		    , ART.ASSET_ID
+		    , ART.RIGHT_CD
+		    , ART.AT_TYPE
+		    , C.NAME
+		    , ART.DATE_FROM
+		    , ART.DATE_TO
+		    , ART.CAN_RESALE
+		    , ART.REGION
+		    , ART.CONTRACT_CD
+		FROM
+			${TBLNAME} ART 
+		LEFT JOIN BO_CONFIG C ON C.TYPE = 1 AND C.CD = ART.RIGHT_CD 
+		WHERE 
+			1 = 1
+		<if test="ASSET_ID != null">
+			AND ART.ASSET_ID = #{ASSET_ID}
+		</if>
+		<if test="RIGHT_CD != null">
+			AND ART.RIGHT_CD = #{RIGHT_CD}
+		</if>
+		ORDER BY C.SEQNO
+	</select>
+	
+	<select id="selectAllRightsOfAssetByAssetId" parameterType="Map" resultType="map">
+        SELECT 
+		  ASSET_RIGHT_T_ID,
+		  ASSET_ID,
+		  RIGHT_CD,
+		  DATE_FROM,
+		  DATE_TO,
+		  AT_TYPE,
+		  REGION,
+		  CONTRACT_CD,
+		  CAN_RESALE 
+		FROM
+            ${TBLNAME} t 
+        WHERE t.ASSET_ID = #{ASSET_ID}
+    </select>
+    
+    <delete id="deleteRightTByAssetId" parameterType="Map">
+         DELETE FROM ${TBLNAME}
+         WHERE ASSET_ID = #{ASSET_ID}
+    </delete>
+    
+    <delete id="deleteAssetRightTByContractCd" parameterType="Map">
+		DELETE 
+		FROM
+		  ${TBLNAME} 
+		WHERE 
+			CONTRACT_CD = #{CONTRACT_CD}
+	</delete>
+</mapper>

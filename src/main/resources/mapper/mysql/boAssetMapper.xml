@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.AssetDaoImpl">
+	<sql id="sql_bo_asset_columns">
+		 SELECT  
+		     A.ASSET_ID AS ASSET_ID
+			 , A.ASSET_CD AS ASSET_CD
+			 , A.WK_NAME AS WK_NAME
+			 , A.AU_NAME_S AS AU_NAME_S
+			 , A.AU_NAME_B AS AU_NAME_B
+			 , A.MEDIA_TYPE_ID AS MEDIA_TYPE_ID
+			 , A.WK_CLASS AS WK_CLASS
+			 , A.WORD_COUNT AS WORD_COUNT
+			 , A.ISBN_NUM AS ISBN_NUM
+			 , A.RIGHT_B AS RIGHT_B
+			 , A.TOTAL_PAY AS TOTAL_PAY
+			 , A.TOTAL_INCOME AS TOTAL_INCOME
+			 , A.CREATE_DATE AS CREATE_DATE
+			 , A.UPDATE_DATE AS UPDATE_DATE
+			 , A.CREATE_USERID AS CREATE_USERID
+			 , A.UPDATE_USERID AS UPDATE_USERID
+	</sql>
+	
+	<sql id="sql_ListWhereCommon">
+		<if test="ASSET_CD != null and ASSET_CD != ''">
+			AND A.ASSET_CD = #{ASSET_CD}
+		</if>
+		<if test="WK_NAME != null and WK_NAME != ''">
+			AND A.WK_NAME LIKE CONCAT('%',#{WK_NAME},'%')
+		</if>
+		<if test="AU_NAME_S != null and AU_NAME_S != ''">
+			AND A.AU_NAME_S = #{AU_NAME_S}
+		</if>
+		<if test="AU_NAME_B != null and AU_NAME_B != ''">
+			AND A.AU_NAME_B = #{AU_NAME_B}
+		</if>
+		<if test="MEDIA_TYPE_ID != null">
+			AND A.MEDIA_TYPE_ID = #{MEDIA_TYPE_ID}
+		</if>
+		<if test="RIGHT_B != null">
+			<![CDATA[
+				AND A.RIGHT_B & #{RIGHT_B}
+			]]>
+		</if>
+		
+		<if test="START_CREATE_DATE != null and START_CREATE_DATE != ''">
+			<![CDATA[
+				  AND DATE_FORMAT(A.CREATE_DATE, '%Y-%m-%d') >=  DATE_FORMAT(#{START_CREATE_DATE}, '%Y-%m-%d')
+			]]>
+		</if>
+		
+		<if test="END_CREATE_DATE != null and END_CREATE_DATE != ''">
+			<![CDATA[
+				  AND DATE_FORMAT(A.CREATE_DATE, '%Y-%m-%d') <=  DATE_FORMAT(#{END_CREATE_DATE}, '%Y-%m-%d')
+			]]>
+		</if>
+		
+		<if test="assetCdList != null">
+			AND A.ASSET_CD IN 
+				<foreach collection="assetCdList" item="assetCd"  open="(" separator="," close=")">   
+					#{assetCd}    
+				</foreach>
+		</if>
+		
+		<if test="wkNameList != null">
+			AND A.WK_NAME IN 
+				<foreach collection="wkNameList" item="wkName"  open="(" separator="," close=")">   
+					#{wkName}    
+				</foreach>
+		</if>
+	</sql>	
+	
+	<select id="searchAssets" parameterType="Map" resultType="map">
+		<include refid="sql_bo_asset_columns"/>
+		FROM
+			BO_ASSET A 
+		WHERE 
+			1 = 1
+		<include refid="sql_ListWhereCommon"/>
+		ORDER BY A.CREATE_DATE DESC
+	</select>
+	
+	<select id="searchAssetsCount" parameterType="Map" resultType="int">
+		SELECT 
+			COUNT(1) 
+		FROM BO_ASSET A
+		WHERE 
+			1 = 1 
+		<include refid="sql_ListWhereCommon"/>
+	</select>
+	
+	<select id="selectAssetsExport" parameterType="Map" resultType="Map">
+		<include refid="sql_bo_asset_columns"/>
+		FROM
+			BO_ASSET A
+		WHERE 
+			1 = 1 
+		<include refid="sql_ListWhereCommon"/>
+		<if test="LASTASSETID != null">
+			AND A.ASSET_ID > #{LASTASSETID}
+		</if>
+		ORDER BY A.ASSET_ID 
+		LIMIT 1000
+	</select>
+	
+	<select id="countAssetByVaules" parameterType="Map" resultType="int">
+        SELECT 
+            COUNT(*) 
+        FROM BO_ASSET A
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="WK_NAME != null and WK_NAME != ''">
+	            AND A.WK_NAME = #{WK_NAME}
+	        </if>
+	        <if test="AU_NAME_S != null and AU_NAME_S != ''">
+                AND A.AU_NAME_S = #{AU_NAME_S}
+            </if>
+            <if test="AU_NAME_B != null and AU_NAME_B != ''">
+                AND A.AU_NAME_B = #{AU_NAME_B}
+            </if>
+            <if test="MEDIA_TYPE_ID != null and MEDIA_TYPE_ID != ''">
+                AND A.MEDIA_TYPE_ID = #{MEDIA_TYPE_ID}
+            </if>
+	     </trim>
+    </select>
+	
+	<update id="updateAssetTotalPay" parameterType="Map" >
+        UPDATE 
+          BO_ASSET
+        SET
+          TOTAL_PAY = 
+          (SELECT 
+            IFNULL(SUM(t.MONEY), 0) AS SUM_MONEY
+          FROM
+            ${TBLNAME_PAY} t 
+          WHERE t.ASSET_ID = #{ASSET_ID}),
+            UPDATE_DATE = SYSDATE(),
+            UPDATE_USERID = #{UPDATE_USERID}
+          WHERE ASSET_ID = #{ASSET_ID}
+    </update>
+    
+    <update id="updateAssetTotalInc" parameterType="Map" >
+        UPDATE 
+          BO_ASSET
+        SET
+          TOTAL_INCOME = 
+          (SELECT 
+            IFNULL(SUM(t.MONEY), 0) AS SUM_MONEY
+          FROM
+            ${TBLNAME_INC} t 
+          WHERE t.ASSET_ID = #{ASSET_ID}),
+            UPDATE_DATE = SYSDATE(),
+            UPDATE_USERID = #{UPDATE_USERID}
+          WHERE ASSET_ID = #{ASSET_ID}
+    </update>
+	
+	<update id="updateAssetInfo" parameterType="Map" >
+        UPDATE 
+          BO_ASSET
+        SET
+          WK_CLASS = #{WK_CLASS},
+          WORD_COUNT = #{WORD_COUNT},
+          ISBN_NUM = #{ISBN_NUM},
+          UPDATE_DATE = SYSDATE(),
+          UPDATE_USERID = #{UPDATE_USERID}
+        WHERE ASSET_ID = #{ASSET_ID}
+    </update>
+	
+	<select id="searchAssetByAssetCd" parameterType="Map" resultType="map">
+		SELECT 
+			* 
+		FROM BO_ASSET A
+		WHERE 
+			1 = 1
+			AND A.ASSET_CD = #{ASSET_CD}
+	</select>
+</mapper>

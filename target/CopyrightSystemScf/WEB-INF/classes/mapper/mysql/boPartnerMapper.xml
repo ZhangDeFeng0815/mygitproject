@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.PartnerDaoImpl">
+
+	<sql id="sql_ListWhereCommon">
+		AND P.IS_DELETED = 2 
+		<if test="PARTNER_ID != null">
+				AND P.PARTNER_ID = #{PARTNER_ID}
+			</if>
+			<if test="PARTNER_NAME != null and PARTNER_NAME != ''">
+				AND P.PARTNER_NAME like CONCAT('%',#{PARTNER_NAME},'%')
+			</if>
+			<if test="PARTNER_TYPE != null">
+				AND P.PARTNER_TYPE = #{PARTNER_TYPE}
+			</if>
+			<if test="partnerIdList != null">
+				AND P.PARTNER_ID IN 
+					<foreach collection="partnerIdList" item="partnerId"  open="(" separator="," close=")">   
+						#{partnerId}    
+					</foreach>
+			</if>
+			<if test="partnerNameList != null">
+				AND P.PARTNER_NAME IN 
+					<foreach collection="partnerNameList" item="partnerName"  open="(" separator="," close=")">   
+						#{partnerName}    
+					</foreach>
+			</if>
+	</sql>	
+	<select id="searchPartners" parameterType="Map" resultType="map">
+		SELECT
+			P.PARTNER_ID
+			, P.PARTNER_NAME
+			, P.PARTNER_TYPE
+			, P.IS_DELETED
+			, P.MEMO
+			, P.CREATE_DATE
+			, P.UPDATE_DATE
+			, P.CREATE_USERID
+			, P.UPDATE_USERID
+		FROM
+			BO_PARTNER P
+		WHERE 
+			1 = 1
+		<include refid="sql_ListWhereCommon"/>
+		ORDER BY P.PARTNER_NAME
+	</select>
+	
+	
+	<select id="searchPartnersCount" parameterType="Map" resultType="int">
+		SELECT 
+			COUNT(1) 
+		FROM BO_PARTNER P
+		WHERE 
+			1 = 1 
+		<include refid="sql_ListWhereCommon"/>
+	</select>
+	
+	<select id="selectPartnersExport" parameterType="Map" resultType="Map">
+		SELECT
+			P.*
+		FROM
+			BO_PARTNER P
+		WHERE 
+			1 = 1 
+		<include refid="sql_ListWhereCommon"/>
+		<if test="LASTPARTNERID != null">
+			AND P.PARTNER_ID > #{LASTPARTNERID}
+		</if>
+		ORDER BY P.PARTNER_ID 
+		LIMIT 1000
+	</select>
+</mapper>

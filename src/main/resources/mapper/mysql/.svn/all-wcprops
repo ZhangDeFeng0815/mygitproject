@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/read/!svn/ver/92325/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql
+END
+boAssetIncomeTMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/read/!svn/ver/92799/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boAssetIncomeTMapper.xml
+END
+boAssetIncomeDMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/read/!svn/ver/92820/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boAssetIncomeDMapper.xml
+END
+boFileMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/read/!svn/ver/92833/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boFileMapper.xml
+END
+boAssetRightTMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/read/!svn/ver/92485/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boAssetRightTMapper.xml
+END
+boAssetRightDMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/read/!svn/ver/92568/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boAssetRightDMapper.xml
+END
+boContractInAssetMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/read/!svn/ver/92426/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boContractInAssetMapper.xml
+END
+boConfigMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/read/!svn/ver/92307/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boConfigMapper.xml
+END
+boAssetPayTMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/read/!svn/ver/92767/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boAssetPayTMapper.xml
+END
+boAssetPayDMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/read/!svn/ver/92673/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boAssetPayDMapper.xml
+END
+boContractOutMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/read/!svn/ver/92952/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boContractOutMapper.xml
+END
+boContractOutAssetMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/read/!svn/ver/92424/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boContractOutAssetMapper.xml
+END
+boAssetMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/read/!svn/ver/92551/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boAssetMapper.xml
+END
+boContractInMapper.xml
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/read/!svn/ver/92833/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/resources/mapper/mysql/boContractInMapper.xml
+END

@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/read/!svn/ver/92328/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl
+END
+ConfigDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/read/!svn/ver/91973/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/ConfigDaoImpl.java
+END
+ContractOutAssetDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/read/!svn/ver/92424/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/ContractOutAssetDaoImpl.java
+END
+ContractInDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/read/!svn/ver/92833/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/ContractInDaoImpl.java
+END
+AssetRightTDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/read/!svn/ver/92483/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/AssetRightTDaoImpl.java
+END
+AssetRightDDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/read/!svn/ver/92531/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/AssetRightDDaoImpl.java
+END
+AssetPayDetailDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/read/!svn/ver/92763/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/AssetPayDetailDaoImpl.java
+END
+ContractInAssetDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/read/!svn/ver/92359/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/ContractInAssetDaoImpl.java
+END
+AssetIncomeDetailDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/read/!svn/ver/92801/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/AssetIncomeDetailDaoImpl.java
+END
+AssetIncomeTotalDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/read/!svn/ver/92800/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/AssetIncomeTotalDaoImpl.java
+END
+AssetPayTotalDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/read/!svn/ver/92763/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/AssetPayTotalDaoImpl.java
+END
+ContractOutDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/read/!svn/ver/92952/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/ContractOutDaoImpl.java
+END
+FileDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/read/!svn/ver/92952/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/FileDaoImpl.java
+END
+AssetDaoImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/read/!svn/ver/92751/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/dao/impl/AssetDaoImpl.java
+END

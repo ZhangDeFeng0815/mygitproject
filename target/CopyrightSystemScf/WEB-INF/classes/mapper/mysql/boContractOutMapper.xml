@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.ContractOutDaoImpl">
+	<select id="selectOutInfoByContractCd" parameterType="Map" resultType="map">
+		SELECT 
+			CONTRACT_ID
+		  , CONTRACT_CD
+		  , PARTNER_ID
+		  , PARTNER_NAME
+		  , IS_DELETED
+		  , ATTACHMENT_ID
+		  , create_date
+		  , update_date
+		  , create_userid
+		  , update_userid
+		FROM BO_CONTRACT_OUT t
+		WHERE CONTRACT_CD = #{CONTRACT_CD}
+		AND IS_DELETED = 0
+	</select>
+</mapper>

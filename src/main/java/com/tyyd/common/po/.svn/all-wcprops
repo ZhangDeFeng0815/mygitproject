@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/read/!svn/ver/92712/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po
+END
+ConfigInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/read/!svn/ver/91927/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/ConfigInfo.java
+END
+AssetInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/read/!svn/ver/91927/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/AssetInfo.java
+END
+PoBaseInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/read/!svn/ver/92712/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/PoBaseInfo.java
+END
+ContractOut.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/read/!svn/ver/92310/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/ContractOut.java
+END
+AssetPayTotal.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/read/!svn/ver/92688/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/AssetPayTotal.java
+END
+AssetIncomeTotal.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/read/!svn/ver/92818/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/AssetIncomeTotal.java
+END
+ContractInAsset.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/read/!svn/ver/92305/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/ContractInAsset.java
+END
+ContractIn.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/read/!svn/ver/92305/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/ContractIn.java
+END
+PartnerInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/read/!svn/ver/91927/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/PartnerInfo.java
+END
+AssetRightTInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/read/!svn/ver/92107/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/AssetRightTInfo.java
+END
+AssetRightDInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/read/!svn/ver/92107/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/po/AssetRightDInfo.java
+END

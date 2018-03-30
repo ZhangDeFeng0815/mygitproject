@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.ConfigDaoImpl">
+	<select id="searchConfigs" parameterType="Map" resultType="map">
+		SELECT  
+		    C.CONFIG_ID
+		    , C.TYPE
+			, C.CD
+			, C.NAME
+			, C.SEQNO
+			, C.MEMO
+			, C.CREATE_DATE 
+			, C.CREATE_USERID 
+		FROM
+			BO_CONFIG C 
+		WHERE 
+			1 = 1
+		<if test="NAME != null and NAME != ''">
+			AND C.NAME = #{NAME} 
+		</if>
+		<if test="TYPE != null">
+			AND C.TYPE = #{TYPE}
+		</if>
+		ORDER BY C.SEQNO
+	</select>
+	
+	<select id="searchConfigsCount" parameterType="Map" resultType="int">
+		SELECT 
+			COUNT(1) 
+		FROM BO_ASSET A
+		WHERE 
+			1 = 1 
+		<if test="NAME != null and NAME != ''">
+			AND C.NAME = #{NAME} 
+		</if>
+		<if test="TYPE != null">
+			AND C.TYPE = #{TYPE}
+		</if>
+	</select>
+</mapper>

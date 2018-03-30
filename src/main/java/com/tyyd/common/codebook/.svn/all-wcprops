@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/read/!svn/ver/92082/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/codebook
+END
+PayDItemEnum.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/read/!svn/ver/92609/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/codebook/PayDItemEnum.java
+END
+IncomeDItemEnum.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/read/!svn/ver/92609/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/codebook/IncomeDItemEnum.java
+END
+ConfigEnum.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/read/!svn/ver/92528/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/common/codebook/ConfigEnum.java
+END

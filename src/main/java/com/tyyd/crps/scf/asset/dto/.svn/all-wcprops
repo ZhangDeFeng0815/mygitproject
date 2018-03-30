@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/read/!svn/ver/92034/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/crps/scf/asset/dto
+END
+AssetDto.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/read/!svn/ver/92823/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/crps/scf/asset/dto/AssetDto.java
+END
+ConfigDto.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/read/!svn/ver/91935/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/crps/scf/asset/dto/ConfigDto.java
+END
+AssetImportResultDto.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/read/!svn/ver/92073/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/crps/scf/asset/dto/AssetImportResultDto.java
+END
+AssetRightTDto.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/read/!svn/ver/92034/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/crps/scf/asset/dto/AssetRightTDto.java
+END
+AssetRightDDto.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/read/!svn/ver/92060/CopyrightSystem/CopyrightSystemScf/trunk/CopyrightSystemScf/src/main/java/com/tyyd/crps/scf/asset/dto/AssetRightDDto.java
+END

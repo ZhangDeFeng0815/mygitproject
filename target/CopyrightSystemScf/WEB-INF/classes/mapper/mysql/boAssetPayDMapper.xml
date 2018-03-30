@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.AssetPayDetailDaoImpl">
+	<select id="selectAssetPayDs" parameterType="Map" resultType="map">
+		SELECT 
+			A.ASSET_CD AS ASSET_CD
+			, A.WK_NAME AS WK_NAME
+			, A.AU_NAME_S AS AU_NAME_S
+			, A.AU_NAME_B AS AU_NAME_B
+			, A.MEDIA_TYPE_ID AS MEDIA_TYPE_ID 
+			, APD.ASSET_PAY_D_ID
+		    , APD.ASSET_ID
+		    , APD.PAY_ITEM_CD
+		    , APD.MONEY
+		    , APD.CONTRACT_CD
+		    , APD.CREATE_DATE
+		    , APD.CREATE_USERID
+		FROM
+			${TBLNAME} APD 
+		INNER JOIN BO_ASSET A ON A.ASSET_ID = APD.ASSET_ID 
+		WHERE 
+			1 = 1
+		<if test="ASSET_ID != null">
+			AND APD.ASSET_ID = #{ASSET_ID}
+		</if>
+		<if test="CONTRACT_CD != null and CONTRACT_CD != ''">
+			AND APD.CONTRACT_CD = #{CONTRACT_CD}
+		</if>
+		
+		<if test="PAY_ITEM_CD != null and PAY_ITEM_CD != ''">
+			AND APD.PAY_ITEM_CD = #{PAY_ITEM_CD}
+		</if>
+		ORDER BY APD.CREATE_DATE DESC
+	</select>
+	
+	<select id="selectPaySumOfItemCdByAssetId" parameterType="Map" resultType="Map">
+        SELECT 
+          t.`ASSET_ID`,
+          t.`PAY_ITEM_CD`,
+          SUM(IFNULL(t.`MONEY`, 0)) AS MONEY 
+        FROM
+          ${TBLNAME} t 
+        WHERE t.`ASSET_ID` = #{ASSET_ID}
+        GROUP BY t.`ASSET_ID`,
+          t.`PAY_ITEM_CD` 
+    </select>
+</mapper>

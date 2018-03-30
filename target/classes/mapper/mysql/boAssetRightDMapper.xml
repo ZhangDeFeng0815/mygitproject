@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.AssetRightDDaoImpl">
+
+	<select id="searchAssetRightDs" parameterType="Map" resultType="map">
+		SELECT  
+			ARD.ASSET_RIGHT_D_ID
+		    , ARD.ASSET_ID
+		    , ARD.RIGHT_CD
+		    , ARD.AT_TYPE
+		    , C.NAME
+		    , ARD.DATE_FROM
+		    , ARD.DATE_TO
+		    , ARD.CAN_RESALE
+		    , ARD.REGION
+		    , ARD.CONTRACT_CD
+		    , ARD.CREATE_DATE
+		FROM
+			${TBLNAME} ARD 
+		INNER JOIN BO_CONFIG C ON C.TYPE = 1 
+			AND C.CD = ARD.RIGHT_CD 
+			<if test="RIGHT_NAME != null and RIGHT_NAME != ''">
+				AND C.NAME = #{RIGHT_NAME} 
+			</if>
+		WHERE 
+			1 = 1
+		<if test="ASSET_ID != null">
+			AND ARD.ASSET_ID = #{ASSET_ID}
+		</if>
+		<if test="RIGHT_CD != null">
+			AND ARD.RIGHT_CD = #{RIGHT_CD}
+		</if>
+		<if test="CONTRACT_CD != null and CONTRACT_CD != ''">
+			AND ARD.CONTRACT_CD = #{CONTRACT_CD}
+		</if>
+		ORDER BY C.SEQNO
+	</select>
+	
+	<select id="selectRightDOfRtByRtId" parameterType="Map" resultType="map">
+        SELECT 
+          ASSET_RIGHT_D_ID,
+          ASSET_ID,
+          RIGHT_CD,
+          DATE_FROM,
+          DATE_TO,
+          AT_TYPE,
+          REGION,
+          CONTRACT_CD,
+          CAN_RESALE 
+        FROM
+            ${TBLNAME} t 
+        WHERE t.ASSET_ID = #{ASSET_ID}
+    </select>
+    
+    <select id="selectAssetRightDsByAssetAndContract" parameterType="Map" resultType="map">
+		SELECT 
+			A.ASSET_CD AS ASSET_CD
+			, A.WK_NAME AS WK_NAME
+			, A.AU_NAME_S AS AU_NAME_S
+			, A.AU_NAME_B AS AU_NAME_B
+			, A.MEDIA_TYPE_ID AS MEDIA_TYPE_ID 
+			, ARD.ASSET_RIGHT_D_ID
+		    , ARD.ASSET_ID
+		    , ARD.RIGHT_CD
+		    , ARD.AT_TYPE
+		    , C.NAME
+		    , ARD.DATE_FROM
+		    , ARD.DATE_TO
+		    , ARD.CAN_RESALE
+		    , ARD.REGION
+		    , ARD.CONTRACT_CD
+		    , ARD.CREATE_DATE
+		FROM
+			${TBLNAME} ARD 
+		LEFT JOIN BO_CONFIG C ON C.TYPE = 1 AND C.CD = ARD.RIGHT_CD 
+		LEFT JOIN BO_ASSET A ON A.ASSET_ID = ARD.ASSET_ID 
+		WHERE 
+			1 = 1
+		<if test="ASSET_ID != null">
+			AND ARD.ASSET_ID = #{ASSET_ID}
+		</if>
+		<if test="CONTRACT_CD != null">
+			AND ARD.CONTRACT_CD = #{CONTRACT_CD}
+		</if>
+		ORDER BY C.SEQNO
+	</select>
+	
+	<delete id="deleteAssetRightDByContractCd" parameterType="Map">
+		DELETE 
+		FROM
+		  ${TBLNAME} 
+		WHERE 
+			CONTRACT_CD = #{CONTRACT_CD}
+	</delete>
+	
+	<select id="searchAssetRightDsOrderByUpdateDate" parameterType="Map" resultType="map">
+		SELECT  
+			ARD.ASSET_RIGHT_D_ID
+		    , ARD.ASSET_ID
+		    , ARD.RIGHT_CD
+		    , ARD.AT_TYPE
+		    , ARD.DATE_FROM
+		    , ARD.DATE_TO
+		    , ARD.CAN_RESALE
+		    , ARD.REGION
+		    , ARD.CONTRACT_CD
+		    , ARD.UPDATE_DATE
+		FROM
+			${TBLNAME} ARD 
+		WHERE 
+			1 = 1
+			AND ARD.ASSET_ID = #{ASSET_ID}
+		<if test="CONTRACT_CD != null">
+			AND ARD.CONTRACT_CD = #{CONTRACT_CD}
+		</if>
+		<if test="RIGHT_CD != null">
+			AND ARD.RIGHT_CD = #{RIGHT_CD}
+		</if>
+		ORDER BY ARD.UPDATE_DATE DESC 
+	</select>
+
+</mapper>

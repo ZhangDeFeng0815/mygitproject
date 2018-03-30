@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.ContractOutAssetDaoImpl">
+	
+	<select id="countContractOutByAId" parameterType="Map" resultType="int">
+        SELECT COUNT(*)
+        FROM
+            BO_CONTRACT_OUT_ASSET
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test='ASSET_ID != null and ASSET_ID != "" or ASSET_ID == 0'>
+                AND ASSET_ID = #{ASSET_ID}
+            </if>
+        </trim>
+    </select>
+    
+    <delete id="deleteByAssetId" parameterType="Map">
+         DELETE FROM BO_CONTRACT_OUT_ASSET
+         WHERE ASSET_ID = #{ASSET_ID} 
+    </delete>
+</mapper>

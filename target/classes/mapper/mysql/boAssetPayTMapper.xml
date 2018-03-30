@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.dao.impl.AssetPayTotalDaoImpl">
+
+    <select id="countPayTotalByAIdAndItemCd" parameterType="Map" resultType="int">
+        SELECT COUNT(*)
+        FROM
+            ${TBLNAME} t
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test='ASSET_ID != null and ASSET_ID != "" or ASSET_ID == 0'>
+                AND t.ASSET_ID = #{ASSET_ID}
+            </if>
+            <if test="PAY_ITEM_CD != null and PAY_ITEM_CD != ''">
+                AND t.PAY_ITEM_CD = #{PAY_ITEM_CD}
+            </if>
+        </trim>
+    </select>
+    
+    <update id="updatePayTotal" parameterType="Map" >
+		UPDATE 
+		  ${TBLNAME} 
+		SET
+		  MONEY = 
+		  (SELECT 
+		    IFNULL(SUM(t.MONEY), 0) 
+		  FROM
+		    ${TBLNAME_D} t 
+		  WHERE t.ASSET_ID = #{ASSET_ID} AND t.PAY_ITEM_CD =#{PAY_ITEM_CD}),
+		    UPDATE_DATE = SYSDATE(),
+		    UPDATE_USERID = #{UPDATE_USERID}
+		  WHERE ASSET_ID = #{ASSET_ID} AND PAY_ITEM_CD = #{PAY_ITEM_CD} 
+    </update>
+    
+    <delete id="deleteAssetRightTByAssetIdAndContractCd" parameterType="Map">
+		DELETE 
+		FROM
+		  ${TBLNAME} 
+		WHERE 
+			1 = 1
+		<if test="ASSET_ID != null">
+			AND ASSET_ID = #{ASSET_ID}
+		</if>
+		<if test="CONTRACT_CD != null">
+			AND CONTRACT_CD = #{CONTRACT_CD}
+		</if>
+	</delete>
+	
+	<delete id="deletePayTotalByAId" parameterType="Map">
+        DELETE FROM ${TBLNAME}
+        WHERE 
+            ASSET_ID = #{ASSET_ID}
+    </delete>
+    
+    <select id="selectAssetPayTs" parameterType="Map" resultType="map">
+		SELECT 
+			A.ASSET_CD AS ASSET_CD
+			, A.WK_NAME AS WK_NAME
+			, A.AU_NAME_S AS AU_NAME_S
+			, A.AU_NAME_B AS AU_NAME_B
+			, A.MEDIA_TYPE_ID AS MEDIA_TYPE_ID 
+			, APT.ASSET_PAY_T_ID
+		    , APT.ASSET_ID
+		    , APT.PAY_ITEM_CD
+		    , APT.MONEY
+		    , APT.CREATE_DATE
+		    , APT.CREATE_USERID
+		FROM
+			${TBLNAME} APT 
+		INNER JOIN BO_ASSET A ON A.ASSET_ID = APT.ASSET_ID 
+		WHERE 
+			1 = 1
+		<if test="ASSET_ID != null">
+			AND APT.ASSET_ID = #{ASSET_ID}
+		</if>
+		
+		<if test="PAY_ITEM_CD != null and PAY_ITEM_CD != ''">
+			AND APT.PAY_ITEM_CD = #{PAY_ITEM_CD}
+		</if>
+		ORDER BY APT.CREATE_DATE DESC
+	</select>
+</mapper>
